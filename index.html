@@ -21,5 +21,30 @@
     <h2>联系我们</h2>
     <p>如果您对本隐私声明有任何疑问，请联系：privacy@example.com</p>
     <p>更新时间：2024年7月26日</p>
+
+    <!-- 脚本来处理授权码 -->
+    <script>
+        // 获取URL中的查询参数
+        const urlParams = new URLSearchParams(window.location.search);
+        // 获取授权码
+        const code = urlParams.get('code');
+        if (code) {
+            // 显示授权码
+            document.body.innerHTML += `<p>Authorization Code: ${code}</p>`;
+            
+            // 可以将授权码发送到服务器进行进一步处理
+            // 例如：使用fetch API发送POST请求
+            fetch('https://yourserver.com/handle_auth_code', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ code: code })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 </body>
 </html>
